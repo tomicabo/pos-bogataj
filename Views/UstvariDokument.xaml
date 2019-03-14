@@ -1,0 +1,162 @@
+﻿<Window x:Class="Blagajna_BogatajCementniIzdelki_v2.Views.UstvariDokument"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Blagajna_BogatajCementniIzdelki_v2.Views"
+        mc:Ignorable="d"
+        Title="Ustvari Dokument" Height="680" Width="1100" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    <Grid Margin="20,30">
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="480"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="0">
+            <StackPanel Orientation="Vertical">
+
+                <!--Dodaj artikel-->
+                <GroupBox Height="auto" Width="auto" VerticalAlignment="Top" FontWeight="Bold" Background="White" BorderBrush="Gray">
+                    <GroupBox.Header>Dodaj artikel</GroupBox.Header>
+                    <TextBlock FontSize="12" FontWeight="Regular">  
+                    
+                    <Grid Margin="0,10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="300"></ColumnDefinition>
+                            <ColumnDefinition Width="200"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        
+                        <Grid Grid.Column="0">
+                            <StackPanel Orientation="Horizontal">
+                                <StackPanel Margin="0,0,10,0">
+                                    <Button Name="btn_dodaj_artikel_baza" Height="25" Width="120" Margin="10,10,0,20" IsEnabled="True" Click="btn_dodaj_artikel_baza_Click">Dodaj artikel iz baze</Button>
+                                    <TextBlock HorizontalAlignment="Right" FontSize="10" FontWeight="SemiBold">Začasni artikel</TextBlock>
+                                    <TextBlock Margin="0,5,0,0" HorizontalAlignment="Right">Koda</TextBlock>
+                                    <TextBlock Margin="0,2,0,0" HorizontalAlignment="Right">Ime artikla</TextBlock>
+                                    <TextBlock Margin="0,2,0,0" HorizontalAlignment="Right">Teža</TextBlock>
+                                    <TextBlock Margin="0,2,0,0" HorizontalAlignment="Right">Količina</TextBlock>
+                                    <TextBlock Margin="0,2,0,0" HorizontalAlignment="Right">Nakupna cena</TextBlock>
+                                </StackPanel>
+                                <StackPanel Margin="0,73,10,0">
+                                    <TextBox x:Name="tb_zac_koda" HorizontalAlignment="Right" TextWrapping="Wrap" Text="" Width="150"/>
+                                    <TextBox x:Name="tb_zac_ime_artikla" HorizontalAlignment="Right" TextWrapping="Wrap" Text="" Width="150"/>
+                                    <TextBox x:Name="tb_zac_teza" HorizontalAlignment="Right" TextWrapping="Wrap" Text="" Width="150" PreviewTextInput="NumberValidationTextBox"/>
+                                    <TextBox x:Name="tb_zac_kolicina" Text="1" HorizontalAlignment="Right" TextWrapping="Wrap" Width="150" PreviewTextInput="NumberValidationTextBox"/>
+                                    <TextBox x:Name="tb_zac_nakupna_cena" HorizontalAlignment="Right" TextWrapping="Wrap" Text="" Width="150" PreviewTextInput="NumberValidationTextBox"/>
+                                    <Button Margin="0,5,0,0" Name="btn_dodaj_zac_artikel" Height="20" Width="150" Click="btn_dodaj_zac_artikel_Click">Dodaj artikel</Button>
+                                </StackPanel>
+                             </StackPanel>
+                        </Grid>
+                        
+                        <Grid Grid.Column="1">
+                            <StackPanel Margin="10,0,0,0" Orientation="Vertical" HorizontalAlignment="Left">
+                                <Button Name="btn_odstrani_artikel" Height="20" Width="140" Click="btn_odstrani_artikel_Click" IsEnabled="False">Odstrani artikel</Button>
+                                <StackPanel Margin="0,42,0,0" Orientation="Horizontal">
+                                    <TextBlock Margin="0,0,8,0">Spremeni ceno:</TextBlock>
+                                    <TextBox Name="tb_spremeni_ceno" Width="50" PreviewTextInput="NumberValidationTextBox"></TextBox>
+                                </StackPanel>
+                                <Button Margin="0,5,0,0" Name="btn_spremeni_ceno" Height="20" Width="140" IsEnabled="False" Click="btn_spremeni_ceno_Click">Spremeni ceno</Button>
+                                <StackPanel Margin="0,15,0,0" Orientation="Horizontal">
+                                    <TextBlock Margin="0,0,8,0">Spremeni količino:</TextBlock>
+                                    <TextBox Name="tb_spremeni_kolicino" Width="35" PreviewTextInput="NumberValidationTextBox"></TextBox>
+                                </StackPanel>
+                                <Button Margin="0,5,0,0" Name="btn_spremeni_kolicino" Height="20" Width="140" IsEnabled="False" Click="btn_spremeni_kolicino_Click">Spremeni količino</Button>
+                            </StackPanel>
+                        </Grid>
+                        
+                    </Grid>
+                </TextBlock>
+                </GroupBox>
+
+                <!--Kupec-->
+                <GroupBox Margin="0,20,0,0" Height="auto" Width="auto" VerticalAlignment="Top" FontWeight="Bold" Background="White" BorderBrush="Gray">
+                    <GroupBox.Header>Kupec</GroupBox.Header>
+                    <TextBlock FontSize="12" FontWeight="Regular">  
+                        <StackPanel Margin="10,15,0,0" HorizontalAlignment="Left">
+                           <TextBox Name="tb_kupec1" Text="" TextWrapping="Wrap" Width="280"/>
+                           <TextBox Name="tb_kupec2" Margin="0,7,0,0" TextWrapping="Wrap" Text="" Width="280"/>
+                           <TextBox Name="tb_kupec3" Margin="0,7,0,0" TextWrapping="Wrap" Text="" Width="280"/>
+                           <TextBox Name="tb_kupec4" Margin="0,7,0,0" TextWrapping="Wrap" Text="" Width="280"/>
+                           <TextBox Name="tb_kupec5" Margin="0,7,0,0" TextWrapping="Wrap" Text="" Width="280"/>
+                           <TextBox Name="tb_kupec6" Margin="0,7,0,15" TextWrapping="Wrap" Text="" Width="280"/>
+                        </StackPanel>
+                    </TextBlock>
+                </GroupBox>
+
+                <!--Popust-->
+                <GroupBox Margin="0,20,0,0" Height="auto" Width="auto" VerticalAlignment="Top" FontWeight="Bold" Background="White" BorderBrush="Gray">
+                    <GroupBox.Header>Popust</GroupBox.Header>
+                    <TextBlock FontSize="12" FontWeight="Regular">  
+                        <StackPanel Margin="10,15,0,10" HorizontalAlignment="Left">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="150"></ColumnDefinition>
+                                    <ColumnDefinition Width="150"></ColumnDefinition>
+                                    <ColumnDefinition Width="150"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                            
+                                <StackPanel Grid.Column="0" Orientation="Vertical">
+                                    <TextBlock HorizontalAlignment="Center">Popust na izbran artikel (%):</TextBlock>
+                                    <TextBox Name="tb_popust_izbran_artikel" Margin="0,5,0,0" Width="80" PreviewTextInput="NumberValidationTextBox"></TextBox>
+                                    <Button Name="btn_popust_izbran_artikel" Margin="0,5,0,0" Width="80" IsEnabled="False" Click="btn_popust_izbran_artikel_Click">Potrdi</Button>
+                                </StackPanel>
+                                <StackPanel Grid.Column="1" Orientation="Vertical">
+                                    <TextBlock HorizontalAlignment="Center">Popust skupaj (%):</TextBlock>
+                                    <TextBox Name="tb_spremeni_popust_skupaj" Margin="0,5,0,0" Width="80" PreviewTextInput="NumberValidationTextBox"></TextBox>
+                                    <Button Name="btn_popust_skupaj" Margin="0,5,0,0" Width="80" Click="btn_popust_skupaj_Click">Potrdi</Button>
+                                </StackPanel>
+                                <StackPanel Grid.Column="2" Orientation="Vertical">
+                                    <TextBlock HorizontalAlignment="Center">Vnesi svoj končni znesek:</TextBlock>
+                                    <TextBox Name="tb_svoj_koncni_znesek" Margin="0,5,0,0" Width="80" PreviewTextInput="NumberValidationTextBox"></TextBox>
+                                    <Button Name="btn_svoj_koncni_znesek" Margin="0,5,0,0" Width="80" Click="btn_svoj_koncni_znesek_Click">Potrdi</Button>
+                                </StackPanel>
+                             </Grid>
+                        </StackPanel>
+                    </TextBlock>
+                </GroupBox>
+
+            </StackPanel>
+        </Grid>
+             
+        <Grid Grid.Column="1">
+            <StackPanel Orientation="Vertical">
+
+                <ListView x:Name="lv_artikli_dokument" HorizontalAlignment="Right" Height="335" Margin="0,9,0,0" FontSize="11" Width="540" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionChanged="lv_artikli_dokument_SelectionChanged">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Koda" Width="40" DisplayMemberBinding="{Binding Koda}" />
+                            <GridViewColumn Header="Ime artikla" Width="190" DisplayMemberBinding="{Binding ImeArtikla}" />
+                            <GridViewColumn Header="ME" Width="35" DisplayMemberBinding="{Binding ME}" />
+                            <GridViewColumn Header="Teža" Width="40" DisplayMemberBinding="{Binding Teza}" />
+                            <GridViewColumn Header="Količina" Width="45" DisplayMemberBinding="{Binding Kolicina}" />
+                            <GridViewColumn Header="%pop" Width="40" DisplayMemberBinding="{Binding PopustArt}" />
+                            <GridViewColumn Header="Nakupna cena" Width="80" DisplayMemberBinding="{Binding Cena}" />
+                            <GridViewColumn Header="Vrednost" Width="65" DisplayMemberBinding="{Binding Vrednost}" />
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+
+                <!--Izračun-->
+                <Grid HorizontalAlignment="Right" Margin="0,20,100,0">
+                    <StackPanel Orientation="Horizontal">
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock TextAlignment="Right" FontSize="16" Height="32">Skupaj:</TextBlock>
+                            <TextBlock TextAlignment="Right" FontSize="16" Height="32">Popust:</TextBlock>
+                            <TextBlock TextAlignment="Right" FontSize="16" Height="32">Popust pri artiklih:</TextBlock>
+                            <TextBlock TextAlignment="Right" FontSize="16" Height="32">Za plačilo:</TextBlock>
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical" Margin="10,0,0,0">
+                            <TextBlock Name="tb_skupaj" Text="0" FontSize="16" Height="32"></TextBlock>
+                            <TextBlock Name="tb_popust_skupaj" Text="0" FontSize="16" Height="32"></TextBlock>
+                            <TextBlock Name="tb_popust_artikli" Text="0" FontSize="16" Height="32"></TextBlock>
+                            <TextBlock Name="tb_za_placilo" Text="0" FontSize="16" Height="32"></TextBlock>
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
+
+                <Button Name="btn_shrani_dokument" Content="Shrani dokument" HorizontalAlignment="Right" Margin="0,20,15,0" Width="200" Height="50" FontSize="16" FontWeight="Bold" Click="btn_shrani_dokument_Click"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>

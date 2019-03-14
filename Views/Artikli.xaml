@@ -1,0 +1,153 @@
+﻿<Window x:Class="Blagajna_BogatajCementniIzdelki_v2.Views.Artikli"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Blagajna_BogatajCementniIzdelki_v2.Views"
+        xmlns:y="clr-namespace:Blagajna_BogatajCementniIzdelki_v2"
+        mc:Ignorable="d"
+        Title="Artikli" Height="1000" Width="2000" WindowState="Maximized">
+
+    <Window.Resources>
+        <y:ByteArrayToImageConverter x:Key="ByteToImage"/>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20"></ColumnDefinition>
+            <ColumnDefinition Width="1050"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Row="1" Grid.Column="1">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                <CheckBox Name="cb_slike" IsChecked="False" Checked="cb_slike_Checked" Unchecked="cb_slike_Unchecked">Slike</CheckBox>
+                <TextBlock Margin="20,-1,0,0">Išči</TextBlock>
+                <TextBox Name="tb_isci" Margin="10,-2,0,0" Width="150" TextChanged="tb_isci_TextChanged"></TextBox>
+                <TextBlock Margin="20,-1,0,0">Izberi kategorijo</TextBlock>
+                <ComboBox Name="cb_kategorije" Margin="10,-2,0,0" Width="150"
+                          ItemsSource="{Binding Path=Kategorije}"
+                          DisplayMemberPath="ImeKategorije"
+                          IsSynchronizedWithCurrentItem="True" SelectionChanged="cb_kategorije_SelectionChanged">
+                </ComboBox>
+            </StackPanel>
+        </Grid>
+
+        <Grid Grid.Row="2" Grid.Column="1">
+            <ListView Name="lv_artikli"  ItemsSource="{Binding Artikli}" HorizontalAlignment="Left" Height="700" Width="1050" VerticalAlignment="Top" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionChanged="lv_artikli_slika_SelectionChanged">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Koda" Width="100" DisplayMemberBinding="{Binding Koda}" />
+                        <GridViewColumn Header="Ime artikla" Width="400" DisplayMemberBinding="{Binding ImeArtikla}" />
+                        <GridViewColumn Header="Dimenzije" Width="200" DisplayMemberBinding="{Binding Dimenzije}" />
+                        <GridViewColumn Header="Teža (kg)" Width="100" DisplayMemberBinding="{Binding Teza}" />
+                        <GridViewColumn Header="Cena (€)" Width="100" DisplayMemberBinding="{Binding Cena}" />
+                    </GridView>
+                </ListView.View>
+            </ListView>
+            
+            <ListView x:Name="lv_artikli_slika" Visibility="Hidden" Width="1050" Height="700" HorizontalAlignment="Left" ItemsSource="{Binding Artikli}" VerticalAlignment="Top" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionChanged="lv_artikli_slika_SelectionChanged">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Width="130" Height="150">
+                            <Image Source="{Binding Slika, Converter={StaticResource ByteToImage}}" Width="130" Height="130" RenderOptions.BitmapScalingMode="LowQuality"/>
+                            <Border HorizontalAlignment="Stretch" Height="32"
+							VerticalAlignment="Bottom"
+							Background="LightGray">
+                                <TextBlock HorizontalAlignment="Left" Margin="5,0,0,0">
+                                    <InlineUIContainer> 
+									    <TextBlock HorizontalAlignment="Left">
+                                            <Run FontWeight="Bold" Text="{Binding Koda}"></Run>
+                                            <Run Text="&#x0a;"></Run>
+                                            <Run Text="{Binding ImeArtikla}"></Run>
+                                        </TextBlock>
+								    </InlineUIContainer>
+                                </TextBlock>
+                            </Border>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel></WrapPanel>
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+            </ListView>
+        </Grid>
+
+        <Grid Grid.Row="2" Grid.Column="2">
+            <StackPanel>
+            <TabControl HorizontalAlignment="Left" Margin="20,0,0,0" VerticalAlignment="Top" Width="400" Height="430">
+                <TabItem Name="uredi" Header="Uredi artikel">
+                    <Grid Background="#FFE5E5E5">
+                        <Label Content="Uredi podatke izbranega artikla" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold"/>
+
+                        <StackPanel Orientation="Horizontal" Margin="10">
+                            <StackPanel Margin="0,50,10,0" Width="80">
+                                <TextBlock Margin="0,0,0,0" HorizontalAlignment="Right">Koda</TextBlock>
+                                <TextBlock Margin="0,2,0,0" HorizontalAlignment="Right">Ime artikla</TextBlock>
+                                <TextBlock Margin="0,4,0,0" HorizontalAlignment="Right">Kategorija</TextBlock>
+                                <TextBlock Margin="0,4,0,0" HorizontalAlignment="Right">Teža</TextBlock>
+                                <TextBlock Margin="0,2,0,0" HorizontalAlignment="Right">Dimenzije</TextBlock>
+                                <TextBlock Margin="0,2,0,0" HorizontalAlignment="Right">Cena</TextBlock>
+                                <Button Content="Izberi sliko" HorizontalAlignment="Left" Margin="0,20" VerticalAlignment="Top" Width="80" Click="Dodaj_Sliko_Click"/>
+                            </StackPanel>
+                            <StackPanel Margin="0,50,10,0">
+                                <TextBox x:Name="u_koda" HorizontalAlignment="Right" Text="" TextWrapping="Wrap" Width="250"/>
+                                <TextBox x:Name="u_ime_artikla" HorizontalAlignment="Right" Text="" TextWrapping="Wrap" Width="250"/>
+                                <ComboBox x:Name="u_kategorija" HorizontalAlignment="Right" Margin="0,0,0,0" VerticalAlignment="Top" Width="250"
+                                    ItemsSource="{Binding Path=Kategorije}"
+                                    DisplayMemberPath="ImeKategorije"
+                                    IsSynchronizedWithCurrentItem="True">
+                                </ComboBox>
+                                <TextBox x:Name="u_teza" HorizontalAlignment="Right" TextWrapping="Wrap" Text="" Width="250" PreviewTextInput="NumberValidationTextBox"/>
+                                <TextBox x:Name="u_dimenzije" HorizontalAlignment="Right" TextWrapping="Wrap" Text="" Width="250"/>
+                                <TextBox x:Name="u_cena" HorizontalAlignment="Right" TextWrapping="Wrap" Text="" Width="250" PreviewTextInput="NumberValidationTextBox"/>
+                                <Image x:Name="u_slika" HorizontalAlignment="Left" Height="150" Margin="0,20,0,0" VerticalAlignment="Top" Width="250"/>
+                                <Button Content="Shrani" Margin="0,20,0,0" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="120" Click="btn_shrani_Click"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Grid>
+                </TabItem>
+                <TabItem Name="dodaj" Header="Dodaj artikel">
+                    <Grid Background="#FFE5E5E5">
+                        <Label Content="Vnesi podatke za nov artikel" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold"/>
+
+                        <StackPanel Orientation="Horizontal" Margin="10">
+                            <StackPanel Margin="0,50,10,0" Width="80">
+                                <TextBlock Margin="0,0,0,0" HorizontalAlignment="Right">Koda</TextBlock>
+                                <TextBlock Margin="0,2,0,0" HorizontalAlignment="Right">Ime artikla</TextBlock>
+                                <TextBlock Margin="0,4,0,0" HorizontalAlignment="Right">Kategorija</TextBlock>
+                                <TextBlock Margin="0,4,0,0" HorizontalAlignment="Right">Teža</TextBlock>
+                                <TextBlock Margin="0,2,0,0" HorizontalAlignment="Right">Dimenzije</TextBlock>
+                                <TextBlock Margin="0,2,0,0" HorizontalAlignment="Right">Cena</TextBlock>
+                                <Button Content="Izberi sliko" HorizontalAlignment="Left" Margin="0,20" VerticalAlignment="Top" Width="80" Click="Dodaj_Sliko_Click"/>
+                            </StackPanel>
+                            <StackPanel Margin="0,50,10,0">
+                                <TextBox x:Name="d_koda" HorizontalAlignment="Right" Text="" TextWrapping="Wrap" Width="250"/>
+                                <TextBox x:Name="d_ime_artikla" HorizontalAlignment="Right" Text="" TextWrapping="Wrap" Width="250"/>
+                                <ComboBox x:Name="d_kategorija" HorizontalAlignment="Right" Margin="0,0,0,0" VerticalAlignment="Top" Width="250"
+                                    ItemsSource="{Binding Path=Kategorije}"
+                                    DisplayMemberPath="ImeKategorije"
+                                    IsSynchronizedWithCurrentItem="True">
+                                </ComboBox>
+                                <TextBox x:Name="d_teza" HorizontalAlignment="Right" TextWrapping="Wrap" Text="" Width="250" PreviewTextInput="NumberValidationTextBox"/>
+                                <TextBox x:Name="d_dimenzije" HorizontalAlignment="Right" TextWrapping="Wrap" Text="" Width="250"/>
+                                <TextBox x:Name="d_cena" HorizontalAlignment="Right" TextWrapping="Wrap" Text="" Width="250" PreviewTextInput="NumberValidationTextBox"/>
+                                <Image x:Name="d_slika" HorizontalAlignment="Left" Height="150" Margin="0,20,0,0" VerticalAlignment="Top" Width="250"/>
+                                <Button Content="Shrani" Margin="0,20,0,0" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="120" Click="btn_shrani_Click"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Grid>
+                </TabItem>
+            </TabControl>
+                <Button Name="btn_dodaj_v_racun" Margin="20" HorizontalAlignment="Left" Width="140" Height="30" Click="btn_dodaj_v_racun_Click">Dodaj v dokument</Button>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>

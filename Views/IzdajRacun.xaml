@@ -1,0 +1,45 @@
+﻿<Window x:Class="Blagajna_BogatajCementniIzdelki_v2.Views.IzdajRacun"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Blagajna_BogatajCementniIzdelki_v2.Views"
+        mc:Ignorable="d"
+        Title="Izdaj Račun" Height="180" Width="280" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    <Grid Margin="20,10">
+        <StackPanel>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="20"></ColumnDefinition>
+                    <ColumnDefinition Width="80"></ColumnDefinition>
+                    <ColumnDefinition Width="120"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25"></RowDefinition>
+                    <RowDefinition Height="10"></RowDefinition>
+                    <RowDefinition Height="20"></RowDefinition>
+                    <RowDefinition Height="25"></RowDefinition>
+                    <RowDefinition Height="20"></RowDefinition>
+                    <RowDefinition Height="20"></RowDefinition>
+                    <RowDefinition Height="20"></RowDefinition>
+
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0" Grid.Column="1" VerticalAlignment="Center">Način plačila:</TextBlock>
+
+                <RadioButton Name="rb_gotovina" Grid.Row="2" Grid.Column="1" IsChecked="True" Unchecked="rb_gotovina_Unchecked">Gotovina</RadioButton>
+                <RadioButton Name="rb_transakcijski" Grid.Row="2" Grid.Column="2" Unchecked="rb_transakcijski_Unchecked">Transakcijski račun</RadioButton>
+
+                <TextBlock Grid.Row="3" Grid.Column="1" Margin="0,3">Rok plačila:</TextBlock>
+                <DatePicker Grid.Row="3" Grid.Column="2" IsEnabled="False" Name="dp_rok" HorizontalAlignment="Left" Width="120"/>
+
+            </Grid>
+        </StackPanel>
+        <Grid HorizontalAlignment="Right" VerticalAlignment="Bottom">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Height="20" Width="100" Margin="0,0,20,0" Click="Button_Click">Prekliči</Button>
+                <Button Height="20" Width="100" Click="Button_Click_1">Izdaj Račun</Button>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>
